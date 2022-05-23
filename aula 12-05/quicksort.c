@@ -1,46 +1,54 @@
-//é o algoritmo de ordenação interna mais rápido que se conhece para uma ampla
-//variedade de situações, provavelmente mais utilizado e tem a ideia básica de
-//dividir o problema de ordenar um conjunto com n itens em dois problemas
-//menores. Os problemas menores são ordenados independentemente e ao final eles
-//são combinados para produzir a solução final.
-
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void quicksort(int number[25], int first, int last) {
-  int i, j, pivot, temp;
+// A utility function to swap two elements
+void swap(int* a, int* b) {
+  int t = *a;
+  *a = *b;
+  *b = t;
+}
 
-  if (first < last) {
-    pivot = first;
-    i = first;
-    j = last;
+int partition(int arr[], int inicio, int fim) {
+  int pivot = arr[fim];
+  int p = (inicio - 1);  // Índice do elemento menor e indica a posição correta
+                         // do pivô encontrado até o momento
 
-    while (i < j) {
-      while (number[i] <= number[pivot] && i < last) i++;
-      	while (number[j] > number[pivot]) j--;
-      	if (i < j) {
-        temp = number[i];
-        number[i] = number[j];
-        number[j] = temp;
-      }
+  // i : Índice que percorre todo o array
+  for (int i = inicio; i <= fim - 1; i++) {
+    // Se o elemento atual for menor que o pivô
+    if (arr[i] < pivot) {
+      //p++;  // incrementa o índice do menor elemento
+      swap(&arr[++p], &arr[i]);
     }
+  }
+  swap(&arr[p + 1], &arr[fim]);
+  return (p + 1);
+}
 
-    temp = number[pivot];
-    number[pivot] = number[j];
-    number[j] = temp;
-    quicksort(number, first, j - 1);
-    quicksort(number, j + 1, last);
+void quickSort(int arr[], int inicio, int fim) {
+  if (inicio < fim) {
+    /* pi é o índice de particionamento,
+    arr[p] agora está no lugar certo */
+    int pi = partition(arr, inicio, fim);
+
+    // Coloca as outras partes nos seus lugares tbm
+    quickSort(arr, inicio, pi - 1);
+    quickSort(arr, pi + 1, fim);
   }
 }
 
-int main() {
-  int i, count, number[25];
-  printf("Enter some elements (Max. - 25): ");
-  scanf("%d", &count);
-  printf("Enter %d elements: ", count);
+void printArray(int arr[], int size) {
+  for (int i = 0; i < size; i++) printf("%d ", arr[i]);
+  puts("");
+}
 
-  for (i = 0; i < count; i++) scanf("%d", &number[i]);
-  quicksort(number, 0, count - 1);
-  printf("The Sorted Order is: ");
-  for (i = 0; i < count; i++) printf(" %d", number[i]);
+int main() {
+  int arr[] = {20, 30, 50, 12, 27, 2, 1, 66};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printArray(arr, size);
+  quickSort(arr, 0, size - 1);
+  printArray(arr, size);
+
   return 0;
 }
