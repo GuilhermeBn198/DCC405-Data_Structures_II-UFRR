@@ -4,5 +4,6 @@
 		"libc-header-start.h": "c",
 		"features.h": "c"
 	},
-	"C_Cpp.errorSquiggles": "Disabled"
+	"C_Cpp.errorSquiggles": "Disabled",
+	"python.formatting.provider": "yapf"
 }
