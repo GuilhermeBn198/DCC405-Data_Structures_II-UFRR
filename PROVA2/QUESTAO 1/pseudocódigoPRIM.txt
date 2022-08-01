@@ -1,0 +1,49 @@
+Função Prim(Grafo): inteiro
+{
+	Declare:
+		V[]: inteiro
+		E[]: inteiro
+		i: inteiro
+		k: inteiro
+		n_acabou: booleano
+		menor: inteiro
+		custo: inteiro
+		aux: inteiro
+		total: inteiro
+	i<-0
+	k<-1
+	V[0]<-0
+	montaMatrizAdjacência();
+	Enquanto(n_acabou) faça
+	{
+		menor<- +∞
+		aux <- 0
+		Enquanto(aux < k) faça
+		{
+			para j<-V[aux]+1 até tam-1
+			{
+				se((E[V[aux]][j] < menor) E (j não pertencer a V) então
+				{
+					menor<-j
+					custo<-A[V[aux]][j]
+				}fim-se
+				aux<-aux + 1
+			}fim-para
+		V[k]<-menor
+		E[k-1]<-custo
+		k<-k + 1
+		se(k = tam) então 
+		{
+			n_acabou<-falso
+		} senão 
+		{
+			i<-menor
+		} fim-se
+		}fim-enquanto
+	}fim-enquanto
+	para n<-0 até tam-2 faça 
+	{
+		total <- total + E[n]
+		retorne total;
+	} fim-para
+}FIM

@@ -1,0 +1,18 @@
+ROTINA fw(Inteiro[1..n,1..n] grafo)    
+# Inicialização    
+VAR Inteiro[1..n,1..n] 
+dist := grafo    
+VAR Inteiro[1..n,1..n] 
+pred    
+PARA i DE 1 A n        
+	PARA j DE 1 A n            
+		SE dist[i,j] < Infinito ENTÃO                
+			pred[i,j] := i    
+			# Laço principal do algoritmo    
+			PARA k DE 1 A n        
+				PARA i DE 1 A n            
+					PARA j DE 1 A n                
+						SE dist[i,j] > dist[i,k] + dist[k,j] ENTÃO                    
+							dist[i,j] = dist[i,k] + dist[k,j]                    
+							pred[i,j] = pred[k,j]    
+							RETORNE dist

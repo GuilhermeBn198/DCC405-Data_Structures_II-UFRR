@@ -1,0 +1,36 @@
+   Busca_A*(Grafo g, Vértice inicio, Vértice fim){
+	    Visitados = {} //Nenhum vértice foi visitado ainda
+	    Abertos ={inicio} //Vértices na fila para exploração
+
+	    custo[] // Vetor que representa os custos dos caminhos para cada 
+        
+        //vértice
+	    anterior[] // Vetor que representa o vértice anterior no caminho
+	    futuro[] //Vetor que representa o custo futuro do caminho
+
+        Enquanto Abertos não for vazio{
+            atual = vértice de Abertos que possui menor valor de caminho futuro
+
+            Se atual == fim
+                Retorne o caminho
+
+            Remove atual de Abertos
+            Insere atual em Visitados
+
+            Para cada vizinho de atual{
+                Se o vizinho não foi visitado{
+                    Se ele não estiver em Abertos
+                        Insere vizinho em Abertos
+
+                    custo_vizinho = custo[atual] + g[atual, vizinho]
+
+                    Se custo_vizinho < custo[vizinho]{
+                        anterior[vizinho] = atual
+                        custo[vizinho] = custo_vizinho
+                        futuro[vizinho] = custo[vizinho]+ HEURÍSTICA
+                    }
+                }	
+            }
+        }
+	    Retorna ERRO
+    }

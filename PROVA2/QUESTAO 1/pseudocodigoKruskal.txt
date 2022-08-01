@@ -1,0 +1,7 @@
+Kruskal (G=(V,E), custos c):
+		# ordene as arestas em ordem crescente de custo
+	T = {}
+	Para cada aresta e = (u, v) em ordem crescente de custo:
+		se T unida com ‘e’ não forma um ciclo:
+			Adicione e em T
+	devolva T
